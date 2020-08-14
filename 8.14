@@ -1,0 +1,65 @@
+We need to pay more attention to zigzag traversal than hierarchical traversal. We use two stacks to do this.
+# code as followed:
+import java.util.ArrayList;
+import java.util.Stack;
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    ArrayList<ArrayList<Integer>> res =new ArrayList<ArrayList<Integer>>();
+    
+    Stack <TreeNode> stack1   =new  Stack<> ();
+    Stack <TreeNode> stack2   =new  Stack<> ();
+    public ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        if(pRoot==null){
+            return res;
+        }
+        stack1(pRoot);
+        return res;
+    }
+    private  void stack1(TreeNode r){
+        stack1.push(r);
+        while(stack1.size()>0||stack2.size()>0){
+            //ArrayList<Integer> pro =new ArrayList<Integer>();
+            //TreeNode r1=null;
+            //TreeNode r2=null;
+            if(stack1.size()>0){
+                ArrayList<Integer> pro =new ArrayList<Integer>();
+                int l=stack1.size();
+            for(int i=0;i<l;i++){
+                 TreeNode r1=stack1.pop();
+                 pro.add(r1.val);
+                if(r1.left!=null)  stack2.push(r1.left);
+                if(r1.right!=null)  stack2.push(r1.right);
+              
+             }
+            res.add(new ArrayList(pro));
+            } 
+            if(stack2.size()>0){
+                ArrayList<Integer> pro =new ArrayList<Integer>();
+                int l2=stack2.size();
+                for(int j=0;j<l2;j++){
+                TreeNode r2=stack2.pop();
+                pro.add(r2.val);
+                if(r2.right!=null) stack1.push(r2.right);
+                if(r2.left!=null) stack1.push(r2.left);
+            }
+            res.add(new ArrayList(pro));
+            }
+            
+        }
+    }
+ }
+            
+        
+       
